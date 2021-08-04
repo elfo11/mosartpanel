@@ -1,28 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <mosartpanel />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import mosartpanel from "./components/PannellinoMosart.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    mosartpanel,
   },
 };
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #36393d;
+  color: white;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding:5px;
+}
+#titlePanel {
+  color: white;
+  font-size: large;
+  background: tomato;
+  box-shadow: 2px 2px 20px black;
+  border-radius: 10px 10px 0px 0px;
+  padding: 10px;
+}
+label {
+  color: white;
 }
 </style>
