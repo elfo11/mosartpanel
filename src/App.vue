@@ -32,5 +32,6 @@ export default {
 }
 label {
   color: white;
-}
+  padding: 3px 0px 0px 0px;
+  }
 </style>

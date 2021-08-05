@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div id="pannellinoMosart" class="p-3">
-      <h1 id="titlePanel">Mosart Panel</h1>
-      <label for="selectGfx">Graphic Channel:</label>
-      <select class="form-select" id="selectGfx" v-model="destination">
+      <div id="titlePanel" >Mosart Panel</div>
+      <label for="selectGfx" class="pt-3">Graphic Channel:</label>
+      <select class="form-select btn-sm" id="selectGfx" v-model="destination">
         <option
           :value="item.value"
           v-for="(item, k) in mosartChannels"
@@ -12,12 +12,12 @@
           {{ item.name }}
         </option>
       </select>
-      <br />
+
       <div>
         <div class="row align-items-end">
           <div class="col">
             <label for="selectIn">Time In:</label>
-            <select class="form-select" id="selectIn" v-model="mosartIn">
+            <select class="form-select btn-sm" id="selectIn" v-model="mosartIn">
               <option value="A">AUTO+</option>
               <option value="M">MANUAL</option>
             </select>
@@ -32,11 +32,10 @@
             />
           </div>
         </div>
-        <br />
         <div class="row align-items-end">
           <div class="col">
             <label for="selectOut">Duration: </label>
-            <select class="form-select" id="selectOut" v-model="mosartMode">
+            <select class="form-select btn-sm" id="selectOut" v-model="mosartMode">
               <option value="A">AUTOOUT</option>
               <option value="B">BACKGROUNDEND</option>
               <option value="S">STORYEND</option>
@@ -68,6 +67,7 @@ export default {
       mosartChannels: [
         { name: "Full", value: "F" },
         { name: "L3", value: "L" },
+        { name: "AR", value: "U" },
         { name: "MPL Program", value: "W100" },
         { name: "CH1", value: "W101" },
         { name: "CH2", value: "W102" },
