@@ -163,8 +163,10 @@ export default {
   methods: {
     ...mapMutations(["setSelectedGFX", "setModeIn", "setModeOut"]),
     mosartSetValue() {
-      this.mosartValue =
-        "Mosart=" + this.selectedGFX + "|" + this.modeIn + "|" + this.modeOut;
+      this.mosartValue = this.selectedGFX !== "F"?
+        "Mosart=" + this.selectedGFX + "|" + this.modeIn + "|" + this.modeOut:
+        "Mosart=" + this.selectedGFX
+        ;
       this.$vizrt.payloadhosting.setFieldText("mosart", this.mosartValue);
       return this.mosartValue;
     },
