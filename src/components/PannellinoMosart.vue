@@ -89,6 +89,7 @@ export default {
       mosartValue: "",
       FTCOut: "00:00",
       FTCIn: "00:00",
+      ready: false,
     };
   },
   computed: {
@@ -111,11 +112,7 @@ export default {
         }
       },
       set: function (val) {
-        if (val == "M") {
-          this.$store.commit("setModeIn", val);
-        } else {
-          this.$store.commit("setModeIn", this.FTCIn);
-        }
+        this.$store.commit("setModeIn", val);
         this.mosartSetValue();
       },
     },
@@ -128,11 +125,7 @@ export default {
         }
       },
       set: function (val) {
-        if (val == "A") {
-          this.$store.commit("setModeOut", this.FTCOut);
-        } else {
-          this.$store.commit("setModeOut", val);
-        }
+        this.$store.commit("setModeOut", val);
         this.mosartSetValue();
       },
     },
@@ -147,13 +140,17 @@ export default {
         values[0] = values[0].replace("Mosart=", "");
         this.destination = values[0];
         this.mosartIn = values[1];
-        this.mosartOut = values[2];
-       if (values[1] != "M"){
+        this.mosartMode = values[2];
+        console.log(values);
+        if (values[1] != "M"){
           this.FTCIn = values[1];
+          console.log("in "+this.FTCIn);
         }
         if (values[2] != "B" && values[2] != "S" && values[2] != "O"){
           this.FTCOut = values[2];
+          console.log("out "+this.FTCOut);
         } 
+        this.ready = true;
       }
     }, 500);
   },
@@ -163,9 +160,17 @@ export default {
   methods: {
     ...mapMutations(["setSelectedGFX", "setModeIn", "setModeOut"]),
     mosartSetValue() {
-      this.mosartValue = ("Mosart=" + this.selectedGFX) + (this.selectedGFX !== "F"? "|" + this.modeIn + "|" + this.modeOut: "");
+      if (this.ready){
+      this.mosartValue = ("Mosart=" + this.selectedGFX) + 
+      (this.selectedGFX !== "F"? 
+        "|" + (this.modeIn !== "M"?
+          this.FTCIn:
+          this.modeIn) + "|" + 
+        (this.modeOut !== "O" && this.modeOut !== "S" && this.modeOut !== "B"?
+        this.FTCOut:
+        this.modeOut): "");
       this.$vizrt.payloadhosting.setFieldText("mosart", this.mosartValue);
-      return this.mosartValue;
+      return this.mosartValue;}
     },
     callbackInterface: function () {
       this.mosartValue = this.$vizrt.payloadhosting.getFieldText("mosart");
@@ -174,13 +179,13 @@ export default {
       this.$store.commit("setModeIn", this.FTCIn);
        setTimeout(() => {
         this.mosartSetValue();
-      }, 200); 
+      }, 20); 
     },
     changeOut: function () {
       this.$store.commit("setModeOut", this.FTCOut);
        setTimeout(() => {
         this.mosartSetValue();
-      }, 200); 
+      }, 20); 
     },
   },
 };
