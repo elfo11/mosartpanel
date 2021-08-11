@@ -99,6 +99,7 @@ export default {
         return this.selectedGFX;
       },
       set: function (val) {
+                      console.log("set destination");
         this.setSelectedGFX(val);
         this.mosartSetValue();
       },
@@ -141,17 +142,14 @@ export default {
         this.destination = values[0];
         this.mosartIn = values[1];
         this.mosartMode = values[2];
-        console.log(values);
         if (values[1] != "M"){
           this.FTCIn = values[1];
-          console.log("in "+this.FTCIn);
         }
         if (values[2] != "B" && values[2] != "S" && values[2] != "O"){
           this.FTCOut = values[2];
-          console.log("out "+this.FTCOut);
-        } 
-        this.ready = true;
+        }
       }
+      this.ready = true;
     }, 500);
   },
   updated() {
@@ -160,6 +158,7 @@ export default {
   methods: {
     ...mapMutations(["setSelectedGFX", "setModeIn", "setModeOut"]),
     mosartSetValue() {
+              console.log("set Mosart");
       if (this.ready){
       this.mosartValue = ("Mosart=" + this.selectedGFX) + 
       (this.selectedGFX !== "F"? 
