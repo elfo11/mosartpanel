@@ -99,7 +99,6 @@ export default {
         return this.selectedGFX;
       },
       set: function (val) {
-                      console.log("set destination");
         this.setSelectedGFX(val);
         this.mosartSetValue();
       },
@@ -158,7 +157,6 @@ export default {
   methods: {
     ...mapMutations(["setSelectedGFX", "setModeIn", "setModeOut"]),
     mosartSetValue() {
-              console.log("set Mosart");
       if (this.ready){
       this.mosartValue = ("Mosart=" + this.selectedGFX) + 
       (this.selectedGFX !== "F"? 

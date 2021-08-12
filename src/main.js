@@ -1,5 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
+import 'es6-promise/auto'
 import store from "./store";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import vizrt from '../common/js/payloadhosting.js'
