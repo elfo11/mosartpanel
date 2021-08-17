@@ -13,7 +13,7 @@
         </option>
       </select>
 
-      <div>
+      <div v-if="destination !== 'F'">
         <div class="row align-items-end">
           <div class="col">
             <label for="selectIn">Time In:</label>
@@ -131,6 +131,7 @@ export default {
     },
   },
   beforeMount() {
+    console.log("before Mount");
     this.$vizrt.payloadhosting.setFieldValueCallbacks({
       mosart: this.callbackInterface,
     });
@@ -147,6 +148,7 @@ export default {
         if (values[2] != "B" && values[2] != "S" && values[2] != "O"){
           this.FTCOut = values[2];
         }
+        console.log("timeout mosart");
       }
       this.ready = true;
     }, 500);
@@ -171,6 +173,7 @@ export default {
     },
     callbackInterface: function () {
       this.mosartValue = this.$vizrt.payloadhosting.getFieldText("mosart");
+      console.log("callback:"+this.mosartValue);
     },
     changeIn: function () {
       this.$store.commit("setModeIn", this.FTCIn);
